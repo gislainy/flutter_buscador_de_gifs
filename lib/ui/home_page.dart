@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                         alignment: Alignment.center,
                         child: CircularProgressIndicator(
                           valueColor:
-                          AlwaysStoppedAnimation<Color>(Colors.white),
+                              AlwaysStoppedAnimation<Color>(Colors.white),
                           strokeWidth: 5.0,
                         ),
                       );
@@ -111,52 +111,45 @@ class _HomePageState extends State<HomePage> {
         itemBuilder: (context, index) {
           if (_search == null || index < snapshot.data["data"].length)
             return GestureDetector(
-                child: FadeInImage.memoryNetwork(
-                  placeholder: kTransparentImage,
-                  image: snapshot
-                      .data["data"][index]["images"]["fixed_height"]["url"],
-                  height: 300.0,
-                  fit: BoxFit.cover,),
-                onTap: ()
-          {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) =>
-                        GifPage(snapshot.data["data"][index])));
-          },onLongPress
-              :
-          (
-          )
-          {
-          Share.share("Veja esse gif: ${snapshot.data
-          ["data"][index]["
-          images"]["original"]["
-          url"]}");
-          }
-          ,
-          );
-          else
-          {
-          return Container(
-          child: GestureDetector(
-          child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-          Icon(Icons.add, color: Colors.white, size: 70.0),
-          Text(
-          "Carregar mais...",
-          style: TextStyle(color: Colors.white, fontSize: 22.0),
-          )
-          ],
-          ),
-          onTap: () {
-          setState(() {
-          _offset += 19;
-          });
-          }),
-          );
+              child: FadeInImage.memoryNetwork(
+                placeholder: kTransparentImage,
+                image: snapshot.data["data"][index]["images"]["fixed_height"]
+                    ["url"],
+                height: 300.0,
+                fit: BoxFit.cover,
+              ),
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            GifPage(snapshot.data["data"][index])));
+              },
+              onLongPress: () {
+                Share.share(
+                    "Veja esse gif: ${snapshot.data["data"][index]["images"]["original"]["url"]}");
+              },
+            );
+          else {
+            return Container(
+              child: GestureDetector(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(Icons.add, color: Colors.white, size: 70.0),
+                      Text(
+                        "Carregar mais...",
+                        style: TextStyle(color: Colors.white, fontSize: 22.0),
+                      )
+                    ],
+                  ),
+                  onTap: () {
+                    setState(() {
+                      _offset += 19;
+                    });
+                  }),
+            );
           }
         });
   }
